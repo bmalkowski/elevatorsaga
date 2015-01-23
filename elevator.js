@@ -26,8 +26,11 @@
             });        
             
             e.on("passing_floor", function(floorNum, direction) { 
-                if (_.contains(requests, floorNum)) {
+                if (e.loadFactor() < 1 && _.contains(requests, floorNum)) {
+                    var q = e.destinationQueue;
                     e.stop();
+                    e.destinationQueue = q;
+                    e.checkDestinationQueue();
                 }
             });
             
