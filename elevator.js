@@ -1,19 +1,34 @@
 {
     init: function(elevators, floors) {
       _.each(floors, function(f) {
+          f.on("down_button_pressed", function(event) { 
+              
+          });
+          
+          f.on("up_button_pressed", function(event) { 
+              
+          });
       });
       
       _.each(elevators, function(e) {
         e.on("idle", function() {
-            // The elevator is idle, so let's go to all the floors (or did we forget one?)
             e.goToFloor(0);            
-            e.goToFloor(1);
-            e.goToFloor(3);
-
         });      
+        
+        e.on("floor_button_pressed", function(floorNum) { 
+            e.goToFloor(floorNum);
+        });        
+      
+        e.on("passing_floor", function(floorNum, direction) { 
+            
+        });
+        
+        e.on("stopped_at_floor", function(floorNum) {
+            
+        });        
       });
     },
+    
     update: function(dt, elevators, floors) {
-        // We normally don't need to do anything here
     }
 }
